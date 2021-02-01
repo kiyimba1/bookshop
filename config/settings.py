@@ -11,9 +11,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = Env()
+env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
@@ -24,8 +28,9 @@ SECRET_KEY = "j$g_pykp)s4&xn63r_0%xm!d238=v6i$d0g6@5@f8x#t)j_a$h"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.heroku.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -94,6 +99,11 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+#DATABASES = {
+#   "default": env.dj_db_url("DATABASE_URL",
+#       default = "postgres://postgres@db/postgres")
+# }
 
 
 # Password validation
