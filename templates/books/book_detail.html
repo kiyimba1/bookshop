@@ -4,8 +4,19 @@
 
 {% block content %}
 <div class="book-detail">
+    <img class="bookcover" src="{{ book.cover.url }}" alt="{{ book.title }}">
     <h2><a href="">{{object.title}}</a></h2>
     <p>Author: {{ object.author }}</p>
     <p>Price: {{object.price }}</p>
+    <div>
+        <h3>Reviews</h3>
+        <ul>
+            {% for review in book.revies.all %}
+            <li>{{ review.review }} ({{ rewiew.author }})</li>
+            {% endfor %}
+        </ul>
+
+    </div>
 </div>
+
 {% endblock %}
